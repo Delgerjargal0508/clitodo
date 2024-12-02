@@ -1,11 +1,6 @@
-/*package main
+package main
 
 import ("fmt")
-
-//App neegdeh uyed Menu garch ireh. Ene ni main function
-//add, edit, duussan taskiig bool
-//task bolgoniig arrayd hadgalah
-//addTask, edittask, deleteTask function bichih
 
 type Task struct {
 	ID int
@@ -16,7 +11,6 @@ type Task struct {
 var tasks []Task
 var nextID int = 1
 
-//Main function. Anh orohod buh bolomjit uildliig console ruu print hiine. Uildliin umnuh toogoor function duudna.
 func main(){
 	for {
 		fmt.Println("/nTodo App")
@@ -115,9 +109,9 @@ func listTask(){
 		return
 	}
 	for _, task := range tasks {
-		status := "Pending"
+		status := "Дуусаагүй"
 		if task.Completed {
-			status = "Completed"
+			status = "Дууссан"
 		}
 		fmt.Printf("ID: %d | Title: %s | Status: %s\n", task.ID, task.Title, status)
 	}
