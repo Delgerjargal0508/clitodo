@@ -4,7 +4,6 @@ import (
 	"fmt"
 )
 
-// Task struct for each task
 type Task struct {
 	ID        int
 	Title     string
@@ -112,9 +111,9 @@ func listTask() {
 		return
 	}
 	for _, task := range tasks {
-		status := "Pending"
+		status := "Дуусаагүй"
 		if task.Completed {
-			status = "Completed"
+			status = "Дууссан"
 		}
 		fmt.Printf("ID: %d | Title: %s | Status: %s\n", task.ID, task.Title, status)
 	}
