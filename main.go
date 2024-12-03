@@ -29,15 +29,17 @@ func main() {
 		switch choice {
 		case 1:
 			addTask()
+			listTask()
 		case 2:
 			editTask()
+			listTask()
 		case 3:
 			deleteTask()
+			listTask()
 		case 4:
 			completeTask()
-		case 5:
 			listTask()
-		case 6:
+		case 5:
 			fmt.Println("App-с гарч байна.")
 			return
 		default:
