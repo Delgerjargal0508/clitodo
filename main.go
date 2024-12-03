@@ -7,20 +7,21 @@ type Task struct {
 	Title     string
 	Completed bool
 }
-
+//Taskuudiig dynamic arrayd hadgalj ID ugnu.
 var tasks []Task
 var nextID int = 1
 
+//main functioniig for loop ashiglaj urgelj prompt hiine. fmtScan ashiglaj songolttoi hargalzah functioniig duudna
 func main() {
 	for {
-		fmt.Println("\nTodo App")
-		fmt.Println("1. Ажил нэмэх")
-		fmt.Println("2. Ажлаа солих")
-		fmt.Println("3. Ажил устгах")
-		fmt.Println("4. Ажил дууссан гэж хадгалах")
-		fmt.Println("5. Ажлуудаа харах")
+		fmt.Println("\nTo-do App")
+		fmt.Println("1. Task нэмэх")
+		fmt.Println("2. Task шинэчлэх")
+		fmt.Println("3. Task устгах")
+		fmt.Println("4. Task дуусгах")
+		fmt.Println("5. Task харах")
 		fmt.Println("6. App-с гарах")
-		fmt.Print("Сонго: ")
+		fmt.Print("Сонголт: ")
 
 		var choice int
 		fmt.Scan(&choice)
@@ -46,7 +47,7 @@ func main() {
 }
 
 func addTask() {
-	fmt.Println("Хийх ажлаа оруулна уу:")
+	fmt.Println("Нэмэх Task-аа бичээрэй:")
 	var title string
 	fmt.Scan(&title)
 	task := Task{ID: nextID, Title: title, Completed: false}
@@ -56,50 +57,46 @@ func addTask() {
 }
 
 func editTask() {
-	fmt.Println("Засварлах ажлын ID-г оруул:")
+	fmt.Println("Шинэчлэх task-н ID-г оруул:")
 	var id int
 	fmt.Scan(&id)
 	for i, task := range tasks {
 		if task.ID == id {
-			fmt.Print("Шинэ ажлаа оруулна уу: ")
+			fmt.Print("Шинэ task оруулаарай: ")
 			var newTitle string
 			fmt.Scan(&newTitle)
 			tasks[i].Title = newTitle
-			fmt.Println("Амжилттай заслаа.")
+			fmt.Println("Амжилттай шинэчиллээ.")
 			return
 		}
 	}
-	fmt.Println("Байхгүй байна.")
 }
 
 func deleteTask() {
-	fmt.Print("Устгах ажлын ID оруул: ")
+	fmt.Print("Устгах task-н ID оруулаарай: ")
 	var id int
 	fmt.Scan(&id)
 
 	for i, task := range tasks {
 		if task.ID == id {
 			tasks = append(tasks[:i], tasks[i+1:]...)
-			fmt.Println("Устгалаа.")
+			fmt.Println("Устгагдлаа.")
 			return
 		}
 	}
-	fmt.Println("Байхгүй байна.")
 }
 
 func completeTask() {
-	fmt.Print("Дуусгах ажлын ID оруул: ")
+	fmt.Print("Дуусгах task-н ID оруул: ")
 	var id int
 	fmt.Scan(&id)
 
 	for i, task := range tasks {
 		if task.ID == id {
 			tasks[i].Completed = true
-			fmt.Println("Ажлыг дуусгалаа.")
 			return
 		}
 	}
-	fmt.Println("Ажил байхгүй.")
 }
 
 func listTask() {
