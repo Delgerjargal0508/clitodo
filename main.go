@@ -1,18 +1,22 @@
 package main
 
-import ("fmt")
-
+import (
+	"bufio"
+	"fmt"
+	"os"
+	"strings"
+)
 type Task struct {
 	ID        int
 	Title     string
 	Completed bool
 }
-//Taskuudiig dynamic arrayd hadgalj ID ugnu.
+
 var tasks []Task
 var nextID int = 1
 
-//main functioniig for loop ashiglaj urgelj prompt hiine. fmtScan ashiglaj songolttoi hargalzah functioniig duudna
 func main() {
+	reader := bufio.NewReader(os.Stdin)
 	for {
 		fmt.Println("\nTo-do App")
 		fmt.Println("1. Task нэмэх")
@@ -24,14 +28,14 @@ func main() {
 		fmt.Print("Сонголт: ")
 
 		var choice int
-		fmt.Scan(&choice)
+		fmt.Scanln(&choice)
 
 		switch choice {
 		case 1:
-			addTask()
+			addTask(reader)
 			listTask()
 		case 2:
-			editTask()
+			editTask(reader)
 			listTask()
 		case 3:
 			deleteTask()
@@ -40,44 +44,48 @@ func main() {
 			completeTask()
 			listTask()
 		case 5:
+			listTask()
+		case 6:
 			fmt.Println("App-с гарч байна.")
 			return
 		default:
-			fmt.Println("Буруу сонголт.")
+			fmt.Println("Буруу сонголт. Дахин оролдоно уу.")
 		}
 	}
 }
 
-func addTask() {
+func addTask(reader *bufio.Reader) {
 	fmt.Println("Нэмэх Task-аа бичээрэй:")
-	var title string
-	fmt.Scan(&title)
+	title, _ := reader.ReadString('\n')
+	title = strings.TrimSpace(title)
 	task := Task{ID: nextID, Title: title, Completed: false}
 	tasks = append(tasks, task)
 	nextID++
-	fmt.Println("Амжилттай нэмлээ")
+	fmt.Println("Амжилттай нэмлээ.")
 }
 
-func editTask() {
+func editTask(reader *bufio.Reader) {
 	fmt.Println("Шинэчлэх task-н ID-г оруул:")
 	var id int
-	fmt.Scan(&id)
+	fmt.Scanln(&id)
+
 	for i, task := range tasks {
 		if task.ID == id {
 			fmt.Print("Шинэ task оруулаарай: ")
-			var newTitle string
-			fmt.Scan(&newTitle)
+			newTitle, _ := reader.ReadString('\n')
+			newTitle = strings.TrimSpace(newTitle)
 			tasks[i].Title = newTitle
 			fmt.Println("Амжилттай шинэчиллээ.")
 			return
 		}
 	}
+	fmt.Println("ID олдсонгүй.")
 }
 
 func deleteTask() {
 	fmt.Print("Устгах task-н ID оруулаарай: ")
 	var id int
-	fmt.Scan(&id)
+	fmt.Scanln(&id)
 
 	for i, task := range tasks {
 		if task.ID == id {
@@ -86,19 +94,22 @@ func deleteTask() {
 			return
 		}
 	}
+	fmt.Println("ID олдсонгүй.")
 }
 
 func completeTask() {
 	fmt.Print("Дуусгах task-н ID оруул: ")
 	var id int
-	fmt.Scan(&id)
+	fmt.Scanln(&id)
 
 	for i, task := range tasks {
 		if task.ID == id {
 			tasks[i].Completed = true
+			fmt.Println("Task дуусгалаа.")
 			return
 		}
 	}
+	fmt.Println("ID олдсонгүй.")
 }
 
 func listTask() {
